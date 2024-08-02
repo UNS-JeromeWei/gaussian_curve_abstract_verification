@@ -66,15 +66,15 @@ ax4.legend()
 ax4.set_title('重叠面积 (瘦高斯动)')
 ax4.grid(True)
 
-# 新增一个子图显示差值
-fig2, ax5 = plt.subplots(figsize=(8, 5))
-diff_plot, = ax5.plot([], [], 'b-', label='重叠面积差值')
-ax5.set_xlim(start_pos, end_pos)
-ax5.set_xlabel('位置')
-ax5.set_ylabel('差值')
-ax5.legend()
-ax5.set_title('重叠面积差值')
-ax5.grid(True)
+# # 新增一个子图显示差值
+# fig2, ax5 = plt.subplots(figsize=(8, 5))
+# diff_plot, = ax5.plot([], [], 'b-', label='重叠面积差值')
+# ax5.set_xlim(start_pos, end_pos)
+# ax5.set_xlabel('位置')
+# ax5.set_ylabel('差值')
+# ax5.legend()
+# ax5.set_title('重叠面积差值')
+# ax5.grid(True)
 
 
 # 更新函数
@@ -89,7 +89,8 @@ def update(frame):
     overlap_areas1.append(overlap1)
 
     # 自动调整y轴
-    ax2.set_ylim(0, 2)
+    # ax2.set_ylim(0, 2)
+    ax2.set_ylim(0, max(overlap_areas1, default=1.1) * 1.1)
     overlap_plot1.set_data(np.linspace(start_pos, start_pos + step_size * len(overlap_areas1), len(overlap_areas1)),
                            overlap_areas1)
 
@@ -100,7 +101,8 @@ def update(frame):
     overlap_areas2.append(overlap2)
 
     # 自动调整y轴
-    ax4.set_ylim(0, 2)
+    # ax4.set_ylim(0, 2)
+    ax4.set_ylim(0, max(overlap_areas2, default=1.1) * 1.1)
     overlap_plot2.set_data(np.linspace(start_pos, start_pos + step_size * len(overlap_areas2), len(overlap_areas2)),
                            overlap_areas2)
 
@@ -108,19 +110,19 @@ def update(frame):
     diff = np.abs(overlap1 - overlap2)
     overlap_diff.append(diff)
 
-    # 自动调整y轴
-    ax5.set_ylim(0, max(overlap_diff, default=1.1) * 1.1)
-    diff_plot.set_data(np.linspace(start_pos, start_pos + step_size * len(overlap_diff), len(overlap_diff)),
-                       overlap_diff)
+    # # 自动调整y轴
+    # ax5.set_ylim(0, max(overlap_diff, default=1.1) * 1.1)
+    # diff_plot.set_data(np.linspace(start_pos, start_pos + step_size * len(overlap_diff), len(overlap_diff)),
+    #                    overlap_diff)
 
     # 打印当前帧的重叠面积
     print(f"Frame {frame}: 重叠面积 (胖高斯动) = {overlap1}, 重叠面积 (瘦高斯动) = {overlap2}, 差值 = {diff}")
 
-    return line2, overlap_plot1, line3, overlap_plot2, diff_plot
+    return line2, overlap_plot1, line3, overlap_plot2
 
 
 # 动画
-ani = FuncAnimation(fig, update, frames=frames, blit=True, interval=50, repeat=False)
+ani = FuncAnimation(fig, update, frames=frames, blit=False, interval=50, repeat=False)
 
 # 显示
 plt.tight_layout()

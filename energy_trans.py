@@ -14,7 +14,7 @@ mean2, std2 = 0, 2  # 胖高斯的标准差
 amp1, amp2 = 2.5, 4  # 瘦高斯和胖高斯的幅度
 step_size = 0.1  # 平移步长
 start_pos = -7.5
-end_pos = 1
+end_pos = 7.5
 frames = int((end_pos - start_pos) / step_size) + 1
 
 # 计算归一化的瘦高斯分布
@@ -87,8 +87,8 @@ def update(frame):
     overlap_areas1.append(overlap1)
 
     # 自动调整y轴
-    ax2.set_ylim(0, 2)
-    # ax2.set_ylim(0, max(overlap_areas1, default=1.1) * 1.1)
+    # ax2.set_ylim(0, 2)
+    ax2.set_ylim(0, max(overlap_areas1, default=1.1) * 1.1)
     overlap_plot1.set_data(np.linspace(start_pos, start_pos + step_size * len(overlap_areas1), len(overlap_areas1)),
                            overlap_areas1)
 
@@ -105,8 +105,8 @@ def update(frame):
     overlap_areas2.append(overlap2)
 
     # 自动调整y轴
-    ax4.set_ylim(0, 2)
-    # ax4.set_ylim(0, max(overlap_areas2, default=1.1) * 1.1)
+    # ax4.set_ylim(0, 2)
+    ax4.set_ylim(0, max(overlap_areas2, default=1.1) * 1.1)
     overlap_plot2.set_data(np.linspace(start_pos, start_pos + step_size * len(overlap_areas2), len(overlap_areas2)),
                            overlap_areas2)
 
@@ -122,7 +122,7 @@ def update(frame):
 
 
 # 动画
-ani = FuncAnimation(fig1, update, frames=frames, blit=True, interval=50, repeat=False)
+ani = FuncAnimation(fig1, update, frames=frames, blit=False, interval=50, repeat=False)
 
 # 显示
 plt.tight_layout()
