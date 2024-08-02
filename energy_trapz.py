@@ -89,7 +89,7 @@ def update(frame):
     overlap_areas1.append(overlap1)
 
     # 自动调整y轴
-    ax2.set_ylim(0, max(overlap_areas1, default=1.1) * 1.1)
+    ax2.set_ylim(0, 2)
     overlap_plot1.set_data(np.linspace(start_pos, start_pos + step_size * len(overlap_areas1), len(overlap_areas1)),
                            overlap_areas1)
 
@@ -100,7 +100,7 @@ def update(frame):
     overlap_areas2.append(overlap2)
 
     # 自动调整y轴
-    ax4.set_ylim(0, max(overlap_areas2, default=1.1) * 1.1)
+    ax4.set_ylim(0, 2)
     overlap_plot2.set_data(np.linspace(start_pos, start_pos + step_size * len(overlap_areas2), len(overlap_areas2)),
                            overlap_areas2)
 
